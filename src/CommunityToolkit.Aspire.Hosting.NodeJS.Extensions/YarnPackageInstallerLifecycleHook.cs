@@ -25,6 +25,6 @@ internal class YarnPackageInstallerLifecycleHook(
             return Task.CompletedTask;
         }
 
-        return _installer.InstallPackages(appModel, cancellationToken);
+        return _installer.InstallPackagesAsync(appModel, cancellationToken);
     }
 }

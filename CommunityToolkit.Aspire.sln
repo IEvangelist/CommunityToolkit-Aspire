@@ -93,7 +93,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommunityToolkit.Aspire.Hos
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommunityToolkit.Aspire.Hosting.Deno", "src\CommunityToolkit.Aspire.Hosting.Deno\CommunityToolkit.Aspire.Hosting.Deno.csproj", "{259D0D48-C856-47C8-8014-66CE9A7C353F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunityToolkit.Aspire.Hosting.Deno.AppHost", "examples\deno\CommunityToolkit.Aspire.Hosting.Deno.AppHost\CommunityToolkit.Aspire.Hosting.Deno.AppHost.csproj", "{6DFA84B9-71DB-4EDC-AA71-C0542D6ECCCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommunityToolkit.Aspire.Hosting.Deno.AppHost", "examples\deno\CommunityToolkit.Aspire.Hosting.Deno.AppHost\CommunityToolkit.Aspire.Hosting.Deno.AppHost.csproj", "{6DFA84B9-71DB-4EDC-AA71-C0542D6ECCCC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EB1596E8-67A9-4B71-A405-75FA7C7474D2}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		CODEOWNERS = CODEOWNERS
+		CONTRIBUTING.md = CONTRIBUTING.md
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+		Directory.Packages.props = Directory.Packages.props
+		global.json = global.json
+		LICENSE = LICENSE
+		nuget.config = nuget.config
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

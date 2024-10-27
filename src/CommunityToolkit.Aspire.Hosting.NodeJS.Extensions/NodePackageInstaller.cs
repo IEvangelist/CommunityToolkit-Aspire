@@ -16,7 +16,7 @@ namespace CommunityToolkit.Aspire.Hosting.NodeJS.Extensions;
 /// <param name="notificationService">The notification service to use.</param>
 internal class NodePackageInstaller(string packageManager, string installCommand, string lockfile, ResourceLoggerService loggerService, ResourceNotificationService notificationService)
 {
-    private readonly bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+    private readonly bool _isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
     /// <summary>
     /// Finds the Node.js resources using the specified package manager and installs the packages.
@@ -24,7 +24,7 @@ internal class NodePackageInstaller(string packageManager, string installCommand
     /// <param name="appModel">The current AppHost instance.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task InstallPackages(DistributedApplicationModel appModel, CancellationToken cancellationToken = default)
+    public async Task InstallPackagesAsync(DistributedApplicationModel appModel, CancellationToken cancellationToken = default)
     {
         var nodeResources = appModel.Resources.OfType<NodeAppResource>();
 
@@ -32,7 +32,7 @@ internal class NodePackageInstaller(string packageManager, string installCommand
 
         foreach (var resource in packageResources)
         {
-            await PerformInstall(resource, cancellationToken);
+            await PerformInstallAsync(resource, cancellationToken);
         }
     }
 
@@ -42,7 +42,7 @@ internal class NodePackageInstaller(string packageManager, string installCommand
     /// <param name="resource">The Node.js application resource to install packages for.</param>
     /// <param name="cancellationToken"></param>
     /// <exception cref="InvalidOperationException">Thrown if there is no package.json file or the package manager exits with a non-successful error code.</exception>
-    private async Task PerformInstall(NodeAppResource resource, CancellationToken cancellationToken)
+    private async Task PerformInstallAsync(NodeAppResource resource, CancellationToken cancellationToken)
     {
         var logger = loggerService.GetLogger(resource);
 
@@ -65,12 +65,12 @@ internal class NodePackageInstaller(string packageManager, string installCommand
 
         logger.LogInformation("Installing {PackageManager} packages in {WorkingDirectory}", packageManager, resource.WorkingDirectory);
 
-        var packageInstaller = new Process
+        using var packageInstaller = new Process
         {
             StartInfo = new ProcessStartInfo
             {
-                FileName = isWindows ? "cmd" : packageManager,
-                Arguments = isWindows ? $"/c {packageManager} {installCommand}" : installCommand,
+                FileName = _isWindows ? "cmd" : packageManager,
+                Arguments = _isWindows ? $"/c {packageManager} {installCommand}" : installCommand,
                 WorkingDirectory = resource.WorkingDirectory,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
